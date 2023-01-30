@@ -1,0 +1,266 @@
+#1i)
+kelvin_to_celsius=function(a)
+{
+  b=a-273.15
+  return(b)
+}
+kelvin_to_celsius(300)
+#ii)
+e=c(90, 50, 70, 80, 70, 60, 20, 30,80, 90, 20)
+print(mean(e))
+print(median(e))
+print(sort(-table(e))[1])
+#iii)
+e=c(90, 50, 70, 80, 70, 60, 20, 30,80, 90, 20)
+e1=sort(unique(e))
+e2=length(e1)
+print(paste("2nd highest value :",e1[e2-1]))
+print(paste("3rd lowest value :",e1[3]))
+
+ 13  
+Day-4/day 4 prg 10.R
+@@ -0,0 +1,13 @@
+#20 a)
+Month=c(1,2,3,4,5,6,7,8,9,10,11,12)
+Spends=c(1000,4000,5000,4500,3000,4000,9000,11000,15000,12000,7000,3000)
+Sales=c(9914,40487,54324,50044,34719,42551,94871,118914,
+        158484,131348,78504,36284)
+company=data.frame(Month,Spends,Sales)
+#b)
+dm=lm(Spends~Sales,data=company)
+dm
+#c)
+newdata=data.frame(Spends=13500)
+prediction=predict(dm,ndata=newdata)
+prediction
+ 16  
+Day-4/day 4 prg 11.R
+@@ -0,0 +1,16 @@
+#19
+u=USArrests
+#i)a)
+str(u)
+dim(u)
+summary(u)
+#b)
+torapes<- rowSums(u[, c("Rape"),drop=FALSE])
+max_state<-names(which.max(torapes))
+print(max_state)
+#c)
+tomurder<- rowSums(u[, c("Murder"),drop=FALSE])
+max_state<-names(which.max(tomurder))
+min_state<-names(which.min(tomurder))
+print(paste("state with Maximum murder :",max_state))
+print(paste("state with Minimum murder :",min_state))
+ 0  
+Day-4/day 4 prg 12.R
+Empty file.
+ 39  
+Day-4/day 4 prg 2.R
+@@ -0,0 +1,39 @@
+#2
+w=airquality
+#i)
+w1=length(w$Temp)
+w1
+s=0
+for (i in w$Temp)
+{
+  s=s+i
+}
+print(paste("Mean of temperature :",s/w1))
+#ii)
+print(head(w))
+#iii)
+w=airquality
+w2=subset(w,select = c("Ozone","Solar.R","Month", "Day"))
+w2
+#iv)
+w4=min(w$Temp)
+w5=length(w$Temp)
+q=0
+for (i in 1:w5) 
+{
+  if(w4==w$Temp[i])
+  {
+    print(paste("Coldest day :",w$Day[i]))
+    break
+  }
+}
+#v
+q=0
+for (i in w$Wind) 
+{
+  if(i>17)
+  {
+    q=q+1
+  }
+}
+paste("Number of days wind more than 17mph :",q)
+ 16  
+Day-4/day 4 prg 3.R
+@@ -0,0 +1,16 @@
+#3
+library(reshape)
+t=airquality
+#i)
+summary(t)
+#ii)
+melt(t)
+#iii)
+t1=melt(t,id.vars=c("Month","Day"))
+print(head(t1))
+#iv)
+t2=cast(t1, Month + Day ~ variable)
+t2
+#v)
+t2=cast(t1,Month~Day,mean)
+t2
+ 22  
+Day-4/day 4 prg 4.R
+@@ -0,0 +1,22 @@
+#4
+library(dplyr)
+#i)
+u <-airquality
+missing_values <- colSums(is.na(u))
+for (i in 1:ncol(u)) {
+  if (missing_values[i]/nrow(u) < 0.1) {
+    u <- u[!is.na(u[,i]),]
+  } else {
+    mean_val <- mean(u[,i], na.rm = TRUE)
+    u[is.na(u[,i]),i] <- mean_val
+  }
+}
+print(u)
+#ii)
+x=u[,"Ozone"] 
+y=u[,"Solar.R"] 
+m1<- lm(x~y)
+m1 
+#iii)
+plot(x, y, main = "Air Quality",xlab = "Ozone", ylab = "Solar")
+abline(lm(x~y,u1=u),col="blue")
+ 25  
+Day-4/day 4 prg 5.R
+@@ -0,0 +1,25 @@
+#1i)
+sample1=sample(LETTERS, 5)
+samplef=factor(sample1)
+fflevel=levels(samplef)[1:5]
+print(fflevel)
+#ii)
+e=c(1:9)
+s=max(e)
+t=min(e)
+r=s-t
+print(r)
+#iii)
+str1="Matrix"
+str2=strsplit(str1,"")[[1]]
+vowels=c("a","e","i","o","u","A","E","I","O","U")
+vcount=0
+for(char in str2)
+{
+  if(char %in% vowels)
+
+  {
+    vcount=vcount + 1
+  }
+}
+print(vcount)
+ 20  
+Day-4/day 4 prg 6.R
+@@ -0,0 +1,20 @@
+#2
+d=ChickWeight
+#i)
+str(d)
+summary(d)
+
+#ii)
+tail(d,6)
+#iii)
+library(dplyr)
+d%>%
+  group_by(Diet)%>%
+  arrange(weight)
+#iv)
+library(reshape)
+md=melt(d,id=c("Time","Chick","Diet"))
+print(head(md))
+#v)
+cas=cast(md,Diet~.,mean)
+print(cas)
+ 25  
+Day-4/day 4 prg 7.R
+@@ -0,0 +1,25 @@
+#3i)
+da=ChickWeight
+
+summary(da)
+#ii)
+boxplot(weight ~ Diet,da=ChickWeight,main ="Weight by
+Diet",
+        xlab="Diet",ylab="Weight")
+#iii)
+diet1=d[d$Diet == 1, ]
+hist(diet1$weight, main = "Histogram of Weight in Diet-1
+Category",
+     xlab = "Weight (in grams)", ylab = "Frequency")
+#iv)
+diet2=d[d$Diet == 4, ]
+hist(diet2$weight, main = "Histogram of Weight in Diet-1
+Category",
+     xlab = "Weight (in grams)", ylab = "Frequency")
+#v)
+library(ggplot2)
+ggplot(d, aes(x = Time, y = weight, color = Diet)) +
+  geom_point() +
+  ggtitle("Weight vs Time Grouped by Diet") +
+  xlab("Time (days)") +
+  ylab("Weight (grams)")
+ 13  
+Day-4/day 4 prg 8.R
+@@ -0,0 +1,13 @@
+#4
+dat=ChickWeight
+#i)
+model=lm(weight ~ Time+factor(Diet),dat=ChickWeight)
+summary(model)
+#ii)
+ndata=data.frame(Time = 10,Diet=1)
+
+prediction=predict(model,newdata = ndata)
+prediction
+#iii)
+error=dat[dat$Time==10&dat$Diet==1,"weight"] - prediction
+error
+ 25  
+Day-4/day 4 prg 9.R
+@@ -0,0 +1,25 @@
+# i. Compute the mean temperature without using built-in function
+mean_temp <- 0
+for(i in 1:nrow(airquality)){
+  mean_temp <- mean_temp + airquality$Temp[i]
+}
+mean_temp <- mean_temp/nrow(airquality)
+print(mean_temp)
+
+# ii. Extract the first five rows from airquality
+first_five_rows <- airquality[1:5,]
+print(first_five_rows)
+
+# iii. Extract all columns from airquality except Temp and Wind
+cols_to_keep <- colnames(airquality)[colnames(airquality) != "Temp" & colnames(airquality) != "Wind"]
+airquality_except_temp_wind <- airquality[,cols_to_keep]
+print(airquality_except_temp_wind)
+
+# iv. Find the coldest day during the period
+coldest_day_index <- which.min(airquality$Temp)
+coldest_day <- airquality[coldest_day_index,]
+print(coldest_day)
+
+# v. Count the number of days when wind speed is greater than 17 mph
+wind_speed_greater_than_17 <- sum(airquality$Wind > 17)
+print(wind_speed_greater_than_17)
