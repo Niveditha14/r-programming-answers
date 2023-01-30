@@ -1,0 +1,345 @@
+#1a
+v=c(1,2,3)
+co=c(5+0i,4+0i)
+l=c(FALSE,TRUE)
+ca=c("ABCDEFGHIJ")
+vec=c("Numeric"=v,"Complex"=co,"Logical"=l,"Character length 10"=ca)
+vec
+#b
+arr <- c(9, 4, 3, 5, 2, 1)
+repeat
+{
+  swap = FALSE
+  for (i in 2:length(arr))
+  {
+    newArr <- arr
+    if (arr[i - 1] > arr[i])
+    {
+      newArr[i - 1] <- arr[i]
+      newArr[i] <- arr[i - 1]
+      arr <- newArr
+      swapped <- TRUE
+    }
+  }
+
+  if (!swapped) {break}
+}
+print(arr)
+arr
+#c
+ex=c(2,4,1,6,3,9,10,37,82,77)
+li=list(ex)
+ex=c(2,4,1,6,3,9,10,37,82,77)
+li=list(ex)
+li
+ex=c(2,4,1,6,3,9,10,37,82,77)
+li=list(ex)
+e1=li[[1]][2]
+e2=li[[1]][3]
+e3=li[[1]][7]
+e4=li[[1]][9]
+v=c(e1,e2,e3,e4)
+print(v)
+#d
+A=matrix(c(2,0,1,3), ncol=2)
+B=matrix(c(5,2,4,-1), ncol=2)
+print(A+B)
+A=matrix(c(2,0,1,3), ncol=2)
+B=matrix(c(5,2,4,-1), ncol=2)
+C=A+B
+D=A-B
+print(C)
+print(D)
+#e
+
+Matrix = matrix(17:25, nrow = 3,ncol = 3)
+print(Matrix)
+print(Matrix)
+M2 = Matrix
+for (i in 1:nrow(M2))
+{
+  for (j in 1:ncol(M2))
+  {
+    M2[i, j] <- Matrix[j, i]
+  }
+}
+print(M2)
+ 40  
+model/model prg-2.R
+@@ -0,0 +1,40 @@
+#2a
+fact=function(n)
+{
+
+  if(n==1)
+  {
+    return(1)
+  }
+  else
+  {
+    return(n*fact(n-1))
+  }
+}
+fact(6)
+#b
+e=c(1:10)
+s=0
+for(i in e)
+{
+  s=s+i
+}
+print(s)
+#c
+o=c(1:10)
+li=list()
+for(i in o)
+{
+  s=i*i
+  li=append(li,s)
+}
+print(li)
+#d
+score=c(90,50,70,80,90,70,60,20,30,80,90,20)
+
+print("Average :")
+print(mean(score))
+print("Median :")
+print(median(score))
+print("Mode:")
+print(sort(-table(score))[1])
+ 17  
+model/model prg-3.R
+@@ -0,0 +1,17 @@
+#3a
+a=mtcars
+dim(a)
+#b
+summary(a)
+#c
+max(a$hp)
+min(a$hp)
+#d
+png(file = "boxplot.png")
+boxplot(mpg ~ cyl, data = mtcars, xlab="Cyl",ylab="MPG")
+#e
+input <- mtcars[,c("mpg","disp","hp","wt")]
+model <- lm(mpg~disp+hp+wt,data =input)
+a1=data.frame("disp"=c(221),"hp"=c(102),"wt"=c(2.91))
+result=predict(model,a1)
+print(result)
+ 42  
+model/model prg-4.R
+@@ -0,0 +1,42 @@
+#4a
+library(MASS)
+library(reshape2)
+
+library(reshape)
+library(dplyr)
+air=airquality
+print("Original data frame:\n")
+print(head(air))
+molten.data=melt(air)
+print(head(molten.data))
+#b
+molten.data <- melt(air,id = c("Month","Day"))
+print("\nAfter melting data frame:\n")
+print(head(molten.data))
+#c
+melt_data <- melt(air, id = c("Ozone"))
+melt_data1 <- melt(air, id = c("Solar.R"))
+melt_data2 <- melt(air, id = c("Wind"))
+melt_data3 <- melt(air, id = c("Temp"))
+cast_data = cast(melt_data, Ozone~variable, mean)
+cast_data1 = cast(melt_data1, Solar.R~variable, mean)
+cast_data2 = cast(melt_data2, Wind~variable, mean)
+cast_data3 = cast(melt_data3, Temp~variable, mean)
+print(head(cast_data))
+print(head(cast_data1))
+print(head(cast_data2))
+print(head(cast_data3))
+#d
+mpg2=air[air$Month==5,3]
+mpg1=air[air$Month==7,3]
+dat=data.frame("May"=mpg2,"July"=mpg1)
+boxplot(dat,main="Air quality(Wind)",xlab="Month",ylab="Wind",col="blue")
+
+png(file = "Air quality.png")
+#e
+mpg3=air[air$Month==6,1]
+mpg4=air[air$Month==6,2]
+mpg5=air[air$Month==6,3]
+barplot(mpg3,xlab="Ozone",ylab="Days",main="Ozone")
+barplot(mpg4,xlab="Solar",ylab="Days",main="Solar")
+barplot(mpg5,xlab="Wind",ylab="Days",main="Wind")
+ 23  
+model/model prg-5.R
+@@ -0,0 +1,23 @@
+#1a
+name=c("Anastasia","Dima","Katherine","james","Emily","Michael",
+       "Matthew","Laura","Kevin","Jonas")
+score=c(12.5,9,16.5,12,9,20,14.5,13.5,8,19)
+attempt=c(1,3,2,3,2,3,1,1,2,1)
+qualify=c("yes","no","yes","no","no","yes","yes","no","no","yes")
+df=data.frame(name,score,attempt,qualify)
+print(df)
+#b
+print(df[c(1,2),])
+#c
+print(df[c(3,5),c(1,3)])
+#d
+su=12.5+9+16.5+12+9+20+14.5+13.5+8+19
+print(su/10)
+#e
+mat=matrix(c(1,2,3),nrow=3)
+vec=c(4,5,6)
+lis=list(c(7,8,9),"Saran")
+listd=list("Matrix"=mat,"Vector"=vec,"List"=lis)
+listd
+print(listd[1])
+print(listd[2])
+ 82  
+model/model prg-6.R
+@@ -0,0 +1,82 @@
+#2a
+kelvin_to_celsius=function(n)
+{
+  e=n-273.15
+  return(e)
+}
+kelvin_to_celsius(300)
+#b
+f="R programming Lab"
+w=1:9
+print("Using for loop")
+for (i in w)
+{
+  print(f)
+}
+print("Using while loop")
+i=1
+while(i<=10)
+{
+  print("R programming Lab")
+  i=i+1
+}
+repeat
+{
+  if(j<=10)
+  {
+    print("R programming Lab")
+    j=j+1
+
+  }
+  else
+  {
+    break
+  }
+}
+#c
+rec=function(n,h,k,i)
+{
+  if(n==i)
+  {
+    return("Fibonacci series")
+  }
+  else
+  {
+    s=h+k
+    i=i+1
+    print(s)
+    rec(n,k,s,i)
+  }
+}
+h=1
+k=1
+i=2
+print(c(h,k))
+rec(5,h,k,i)
+#d
+lcm <- function(x, y) {
+  if(x > y) {
+
+    greater = x
+  } else {
+    greater = y
+  }
+  while(TRUE) {
+    if((greater %% x == 0) && (greater %% y == 0)) {
+      lcm = greater
+      break
+    }
+    greater = greater + 1
+  }
+  return(lcm)
+}
+num1 = 2
+num2 = 3
+print(paste("The L.C.M. of two numbers :", lcm(num1, num2)))
+#e
+mo=function(u)
+{
+  return(sort(-table(u))[1])
+}
+u=c(14,12,17,13,14,13,14.2,18,20,15,14,16,18,15)
+mo(u)
+ 35  
+model/model prg-7.R
+@@ -0,0 +1,35 @@
+library(MASS)
+library(reshape2)
+library(reshape)
+
+library(dplyr)
+air=airquality
+print("Original data frame:\n")
+print(head(air))
+molten.data=melt(air)
+print(head(molten.data))
+#b
+molten.data <- melt(air,id = c("Month","Day"))
+print("\nAfter melting data frame:\n")
+print(head(molten.data))
+#c
+cast_data = cast(molten.data,Month~variable,sum)
+print(cast_data)
+#d
+melt_data <- melt(air, id = c("Ozone"))
+melt_data1 <- melt(air, id = c("Solar.R"))
+melt_data2 <- melt(air, id = c("Wind"))
+melt_data3 <- melt(air, id = c("Temp"))
+cast_data1= cast(melt_data, Ozone~variable, mean)
+cast_data2 = cast(melt_data1, Solar.R~variable, mean)
+cast_data3 = cast(melt_data2, Wind~variable, mean)
+cast_data4 = cast(melt_data3, Temp~variable, mean)
+print(head(cast_data1))
+print(head(cast_data2))
+print(head(cast_data3))
+print(head(cast_data4))
+#e
+mpg2=air[,1]
+
+boxplot(mpg2,main="Air
+quality(Ozone)",xlab="Month",ylab="Ozone",col="blue")
+ 19  
+model/model prg-8.R
+@@ -0,0 +1,19 @@
+#4a
+b1=c(21,62,10,53)
+city=c("London","New York","Singapore","Mumbai")
+pie(b1,labels=city,main="City pie-chart")
+legend("topright", c("London","New York","Singapore","Mumbai"))
+#b
+he=c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+we=c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+sal=data.frame(he,we)
+rel=lm(we~he,data = sal)
+rel
+he1=data.frame(he=170)
+res=predict(rel,he1)
+print(res)
+#c
+plot(we,he,main='Regression Graph',xlab='Weight',ylab='Height')
+abline(61.380,1.415)
+#e
+summary(a)
